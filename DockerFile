@@ -13,10 +13,10 @@ RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy source file
-COPY unified_hybrid_rag02.py .
+COPY unified_hybrid_rag.py .
 
 # Inform Azure App Service about the execution port
 EXPOSE 8000
 
 # Start up command execution instruction
-CMD ["python", "unified_hybrid_rag02.py"]
+CMD ["python", "unified_hybrid_rag.py"]
