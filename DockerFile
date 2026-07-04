@@ -1,0 +1,22 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install base compiler tools needed for heavy Python packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Cache dependencies layer
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Copy source file
+COPY unified_hybrid_rag02.py .
+
+# Inform Azure App Service about the execution port
+EXPOSE 8000
+
+# Start up command execution instruction
+CMD ["python", "unified_hybrid_rag02.py"]
